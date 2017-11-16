@@ -1,0 +1,27 @@
+
+{% form_theme form _self %}
+
+<ul class="Linklist Linklist--padded Treeview Treeview--default js-Treeview u-text-r-xs">
+    {%- for child in form %}
+        {%- if "apriAlbero@@" == child.vars["label"]|slice(0, 12) -%}
+            <li>
+            <a>&nbsp;
+                {{- form_widget(child) -}}
+                {{- child.vars["label"]|slice(12, child.vars["label"]|length-12) -}}
+            </a>
+            <ul>
+        {%- elseif "chiudiAlbero" == child.vars["label"]|slice(0, 12) -%}
+            </ul>
+            </li>
+        {%- else %}
+            <li>
+                <a>&nbsp;
+                    {{- form_widget(child) -}}
+                    {{- child.vars["label"] -}}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor -%}
+</ul>
+
+

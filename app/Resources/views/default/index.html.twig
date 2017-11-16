@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block scriptJs %}
+    <script src="{{ asset('ita-web-toolkit/vendor/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('ita-web-toolkit/vendor/modernizr.js') }}"></script>
+    <script src="{{ asset('ita-web-toolkit/IWT.min.js') }}"></script>
+    <script src="{{ asset('ita-web-toolkit/0.chunk.js') }}"></script>
+    <script src="{{ asset('ita-web-toolkit/1.chunk.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('ita-web-toolkit/build.css') }}" media="all" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="u-margin-bottom-l u-borderRadius-m u-padding-all-m">
+
+        {{ form_start(form) }}
+        <fieldset class="Form-fieldset">
+
+            {%- if form_errors(form.arraySettori)|length > 0 -%}
+                <div class="Form-field is-invalid">
+                    <div class="Alert Alert--error Alert--withBg u-padding-r-top u-padding-r-bottom u-padding-r-right">
+                        {{- form_errors(form.arraySettori) -}}
+                        {{- form_label(form.arraySettori) -}}
+                        <div id="form_arraySettori" class="Form-input">
+                            {{ render(controller("AlberoBundle:Default:index", { ('checkBoxList') : form.arraySettori })) }}
+                        </div>
+                    </div>
+                </div>
+            {%- else -%}
+                <div class="Form-field">
+                    {{- form_label(form.arraySettori) -}}
+                    <div id="form_arraySettori" class="Form-input">
+                        {{ render(controller("AlberoBundle:Default:index", { ('checkBoxList') : form.arraySettori })) }}
+                    </div>
+                </div>
+            {%- endif -%}
+        </fieldset>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
